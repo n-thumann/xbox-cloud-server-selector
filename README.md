@@ -9,7 +9,7 @@ A browser extension to force the usage of IPv6 on Xbox Cloud.
 3. Enable `Developer mode` (in the left sidebar in Edge, at the top right in Chrome)
 4. Click `Load Unpacked` and select the `src` directory of this repository
 
-This is unfortunately needed, because this extension isn't on the Edge Add-ons / Chrome Web Store (yet).
+This is unfortunately needed, because this extension isn't on the Edge Add-ons / Chrome Web Store (yet). Also, note that only Edge / Chrome version 111 or higher is supported due to [this feature](https://chromium-review.googlesource.com/c/chromium/src/+/4119014) being used.
 
 ## Confirming functionality
 
