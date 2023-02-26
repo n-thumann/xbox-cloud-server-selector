@@ -2,7 +2,7 @@
 
 A browser extension to force the usage of IPv6 on Xbox Cloud.
 
-# Installation
+## Installation
 
 1. Download / clone this repository
 2. Open your browsers extensions (`edge://extensions/` / `chrome://extensions/`)
@@ -11,11 +11,11 @@ A browser extension to force the usage of IPv6 on Xbox Cloud.
 
 This is unfortunately needed, because this extension isn't on the Edge Add-ons / Chrome Web Store (yet).
 
-# Confirming functionality
+## Confirming functionality
 
 Install this plugin as explained above, then start a capture in [Wireshark](https://www.wireshark.org/) and start a game on [xbox.com/play](https://www.xbox.com/play). You see lots of UDP packets via IPv6 instead of IPv4.
 
-# How it works
+## How it works
 
 This extension overwrites the [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/fetch) method to intercept requests to the Xbox servers. Right after the Xbox logo and sound appear when starting a game, the ICE candidates are requested from `https://[region].core.gssv-play-prod.xboxlive.com/v5/sessions/cloud/[uuid]/ice`.
 The response looks like this
