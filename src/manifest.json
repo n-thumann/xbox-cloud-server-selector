@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "xbox-cloud-force-ipv6",
+  "version": "1.0",
+  "description": "Force the usage of IPv6 on Xbox Cloud",
+  "homepage_url": "https://github.com/n-thumann/xbox-cloud-force-ipv6",
+  "minimum_chrome_version": "111",
+
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["https://www.xbox.com/*/play*"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ]
+}
