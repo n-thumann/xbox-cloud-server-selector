@@ -1,0 +1,28 @@
+{
+  "name": "xbox-cloud-force-ipv6",
+  "version": "1.0.0",
+  "description": "A browser extension to force the usage of IPv6 on Xbox Cloud.",
+  "main": "content.js",
+  "scripts": {
+    "lint": "eslint src --max-warnings 0",
+    "lint:fix": "eslint src --max-warnings 0 --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-thumann/xbox-cloud-force-ipv6.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n-thumann/xbox-cloud-force-ipv6/issues"
+  },
+  "homepage": "https://github.com/n-thumann/xbox-cloud-force-ipv6#readme",
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "prettier": "^2.8.4",
+    "standard": "^17.0.0"
+  }
+}
