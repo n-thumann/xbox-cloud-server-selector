@@ -1,0 +1,41 @@
+{
+  "name": "xbox-cloud-server-selector",
+  "description": "A browser extension to select the server region and IP version for Xbox Cloud Gaming",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "watch": "webpack --config webpack.dev.js --watch",
+    "lint": "eslint src --max-warnings 0",
+    "lint:fix": "eslint src --max-warnings 0 --fix",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "clean": "rm -r dist/ node_modules/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-thumann/xbox-cloud-server-selector.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/n-thumann/xbox-cloud-server-selector/issues"
+  },
+  "homepage": "https://github.com/n-thumann/xbox-cloud-server-selector",
+  "devDependencies": {
+    "@types/chrome": "^0.0.225",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.8.7",
+    "standard": "^17.0.0",
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
+  }
+}
