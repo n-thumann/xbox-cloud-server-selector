@@ -1,0 +1,136 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: Install dependencies
+        run: npm ci
+      - name: Run formatter
+        run: npm run format
+      - name: Run linter
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Create zip archive
+        run: |
+          cd dist/
+          zip -r ../extension.zip *
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: extension
+          path: ./extension.zip
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: extension
+      - name: Get extension version
+        run: echo "version=$(jq -r ".version" manifest.json)" >> $GITHUB_ENV
+      - name: Create release
+        run: |
+          gh release create \
+          --latest \
+          --generate-notes \
+          "v${{ env.version }}" \
+          extension.zip
+
+  publish_edge:
+    name: Publish to Microsoft Edge Add-ons
+    runs-on: ubuntu-latest
+    needs: release
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download release assets
+        run: |
+          gh release download ${{ github.event.release.tag_name }} --pattern "extension.zip"
+
+      - name: Get access token
+        # Explicitly specify bash to enable pipefail
+        shell: bash
+        run: |
+          ACCESS_TOKEN=$(
+            curl \
+              -s \
+              -X POST \
+              -H "Content-Type: application/x-www-form-urlencoded" \
+              -d "client_id=${{ secrets.EDGE_CLIENT_ID }}" \
+              -d "scope=https://api.addons.microsoftedge.microsoft.com/.default" \
+              -d "client_secret=${{ secrets.EDGE_CLIENT_SECRET }}" \
+              -d "grant_type=client_credentials" \
+              --fail-with-body \
+              https://login.microsoftonline.com/${{ secrets.EDGE_REFRESH_TOKEN }}/oauth2/v2.0/token \
+            | jq -r ".access_token"
+          )
+          echo "::add-mask::$ACCESS_TOKEN"
+          echo "access_token=$ACCESS_TOKEN" >> $GITHUB_ENV
+      - name: Publish release
+        run: |
+          curl \
+            -H "Authorization: Bearer ${{ env.access_token }}" \
+            -H "Content-Type: application/zip" \
+            -X POST \
+            -T extension.zip \
+            --fail-with-body \
+            https://api.addons.microsoftedge.microsoft.com/v1/products/${{ secrets.EDGE_PRODUCT_ID }}/submissions/draft/package
+
+  publish_chrome:
+    name: Publish to Chrome Web Store
+    runs-on: ubuntu-latest
+    needs: release
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download release assets
+        run: |
+          gh release download ${{ github.event.release.tag_name }} --pattern "extension.zip"
+      - name: Get access token
+        # Explicitly specify bash to enable pipefail
+        shell: bash
+        run: |
+          ACCESS_TOKEN=$(
+            curl \
+            -s \
+            -X POST \
+            -d "client_id=${{ secrets.CHROME_CLIENT_ID }}" \
+            -d "client_secret=${{ secrets.CHROME_CLIENT_SECRET }}" \
+            -d "refresh_token=${{ secrets.CHROME_REFRESH_TOKEN }}" \
+            -d "grant_type=refresh_token" \
+            --fail-with-body \
+            "https://accounts.google.com/o/oauth2/token" \
+            | jq -r ".access_token"
+          )
+          echo "::add-mask::$ACCESS_TOKEN"
+          echo "access_token=$ACCESS_TOKEN" >> $GITHUB_ENV
+      - name: Publish release
+        run: |
+          curl \
+            -H "Authorization: Bearer ${{ env.access_token }}" \
+            -H "x-goog-api-version: 2" \
+            -X PUT \
+            -T extension.zip \
+            --fail-with-body \
+            https://www.googleapis.com/upload/chromewebstore/v1.1/items/${{ secrets.CHROME_PRODUCT_ID }}
