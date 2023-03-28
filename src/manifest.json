@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "xbox-cloud-server-selector",
+  "version": "0.0.0.1",
+  "description": "A browser extension to select the server region and IP version for Xbox Cloud Gaming",
+  "icons": {
+    "128": "icon.png"
+  },
+  "homepage_url": "https://github.com/n-thumann/xbox-cloud-server-selector",
+  "minimum_chrome_version": "111",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage"],
+
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "matches": ["https://www.xbox.com/*/play*"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "js": ["bridge.js"],
+      "matches": ["https://www.xbox.com/*/play*"],
+      "run_at": "document_start"
+    }
+  ]
+}
