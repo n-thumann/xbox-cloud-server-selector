@@ -46,7 +46,7 @@ jobs:
         with:
           name: extension
       - name: Get extension version
-        run: echo "version=$(jq -r ".version" manifest.json)" >> $GITHUB_ENV
+        run: echo "version=$(jq -r ".version" ./src/manifest.json)" >> $GITHUB_ENV
       - name: Create release
         run: |
           gh release create \
