@@ -1,0 +1,55 @@
+body {
+  width: 17rem;
+  height: auto;
+  font-size: 0.875rem;
+  padding: 0.75rem;
+}
+
+.settings-container {
+  display: grid;
+  grid-gap: 1.5rem;
+}
+
+.settings-select-container {
+  display: grid;
+  grid-gap: 0.5rem;
+}
+
+.settings-label {
+  font-weight: 600;
+}
+
+.settings-select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.settings-alert {
+  display: grid;
+  grid-gap: 0.25rem;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  color: #004085;
+  background-color: #cce5ff;
+  border: 1px solid #b8daff;
+  border-radius: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #202124;
+    color: #cecfd0;
+  }
+
+  .settings-select {
+    background-color: #2d2e32;
+    border-color: #2d2e32;
+    color: #cecfd0;
+  }
+
+  .settings-alert {
+    color: #bccbdb;
+    background-color: #2c4156;
+    border: 1px solid #2c4156;
+  }
+}
