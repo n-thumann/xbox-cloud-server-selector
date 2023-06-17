@@ -1,12 +1,23 @@
 # xbox-cloud-server-selector
 
-A browser extension to select the server region and IP version for Xbox Cloud Gaming
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/46975855/228374614-ccbb02b8-251f-4007-8c40-3afe82c6c3c9.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/46975855/228374604-1714b12c-4d71-43de-9700-ff3a4f0432c9.png">
-  <img alt="Demo of xbox-cloud-server-selector" src="https://user-images.githubusercontent.com/46975855/228374604-1714b12c-4d71-43de-9700-ff3a4f0432c9.png">
-</picture>
+<div align="center">
+  <p>A browser extension to select the server region and IP version for Xbox Cloud Gaming</p>
+  <p>
+    <a href="https://microsoftedge.microsoft.com/addons/detail/server-selector-for-xbox-/looadgdipbgeafcccmoagnbbgnjgeefp">
+      <img alt="Users on Edge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fgetproductdetailsbycrxid%2Flooadgdipbgeafcccmoagnbbgnjgeefp&query=%24.activeInstallCount&logo=microsoftedge&logoColor=white&label=users%20on%20edge&color=blue&link=https%3A%2F%2Fmicrosoftedge.microsoft.com%2Faddons%2Fdetail%2Fserver-selector-for-xbox-%2Flooadgdipbgeafcccmoagnbbgnjgeefp">
+    </a>
+    <a href="https://chrome.google.com/webstore/detail/server-selector-for-xbox/lanknfgmjkocejapddeibabjpdenkpnn">
+      <img alt="Users on Chrome" src="https://img.shields.io/chrome-web-store/users/lanknfgmjkocejapddeibabjpdenkpnn?logo=googlechrome&logoColor=white&label=users%20on%20chrome&color=blue&link=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fserver-selector-for-xbox%2Flanknfgmjkocejapddeibabjpdenkpnn">
+    </a>
+  </p>
+  <p>
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/46975855/228374614-ccbb02b8-251f-4007-8c40-3afe82c6c3c9.png">
+      <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/46975855/228374604-1714b12c-4d71-43de-9700-ff3a4f0432c9.png">
+      <img alt="Demo of xbox-cloud-server-selector" src="https://user-images.githubusercontent.com/46975855/228374604-1714b12c-4d71-43de-9700-ff3a4f0432c9.png">
+    </picture>
+  </p>
+</div>
 
 ## Installation
 
