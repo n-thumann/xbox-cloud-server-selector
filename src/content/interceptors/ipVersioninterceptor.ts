@@ -7,7 +7,7 @@ class IpVersionInterceptor implements Interceptor {
     method: "GET",
     // @ts-ignore: URLPattern is not known to Typescript yet
     urlPattern: new URLPattern(
-      "https://*.core.gssv-play-prod.xboxlive.com/v5/sessions/cloud/*/ice"
+      "https://*.core.gssv-play-prod.xboxlive.com/v5/sessions/cloud/*/ice",
     ),
   };
 
@@ -22,7 +22,7 @@ class IpVersionInterceptor implements Interceptor {
 
   public async intercept(
     settings: Settings,
-    response: Response
+    response: Response,
   ): Promise<Response> {
     if (!settings.ipVersion || settings.ipVersion.value == "default")
       return response;
@@ -42,7 +42,7 @@ class IpVersionInterceptor implements Interceptor {
         return (
           this.getIpVersion(rtcIceCandidate.address) == settings.ipVersion.value
         );
-      }
+      },
     );
 
     log("New ICE candidates:", newIceCandidates);

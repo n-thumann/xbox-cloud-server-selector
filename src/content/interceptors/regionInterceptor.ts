@@ -7,13 +7,13 @@ class RegionInterceptor implements Interceptor {
     method: "POST",
     // @ts-ignore: URLPattern is not known to Typescript yet
     urlPattern: new URLPattern(
-      "https://xgpuweb.gssv-play-prod.xboxlive.com/v2/login/user"
+      "https://xgpuweb.gssv-play-prod.xboxlive.com/v2/login/user",
     ),
   };
 
   public async intercept(
     settings: Settings,
-    response: Response
+    response: Response,
   ): Promise<Response> {
     if (!settings.region || settings.region.value == "default") return response;
 
