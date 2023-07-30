@@ -47,7 +47,7 @@ You can also select a different region - preferably far away from your actual lo
 ## How it works
 
 This extension overwrites the [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/fetch) method to intercept requests to the Xbox servers.
-When loading [xbox.com/play](https://www.xbox.com/play), a POST request is made to `https://xgpuweb.gssv-play-prod.xboxlive.com/v2/login/user`.
+When loading [xbox.com/play](https://www.xbox.com/play), a POST request is made to `https://xgpuweb.gssv-play-prod.xboxlive.com/v2/login/user` for Game Pass Ultimate users or `https://xgpuwebf2p.gssv...` for Free to Play users.
 The response contains a list of all regions with one of them marked as the default region (shortened):
 
 ```json
