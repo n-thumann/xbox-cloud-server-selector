@@ -5,7 +5,7 @@ document.querySelector("#settings").addEventListener("change", save);
 
 async function save() {
   const selects = document.querySelectorAll(
-    "#settings select"
+    "#settings select",
   ) as NodeListOf<HTMLSelectElement>;
   const settings: { [id: string]: { value: string; text: string } } = {};
 
@@ -23,7 +23,7 @@ async function save() {
 async function load() {
   const settings = await chrome.storage.local.get();
   const selects = document.querySelectorAll(
-    "#settings select"
+    "#settings select",
   ) as NodeListOf<HTMLSelectElement>;
   for (const select of selects) {
     select.value = settings[select.id]?.value ?? "default";
