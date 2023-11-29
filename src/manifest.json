@@ -7,7 +7,7 @@
     "128": "icon.png"
   },
   "homepage_url": "https://github.com/n-thumann/xbox-cloud-server-selector",
-  "minimum_chrome_version": "111",
+  "minimum_chrome_version": "1",
   "action": {
     "default_popup": "popup.html"
   },
