@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Server Selector for Xbox Cloud Gaming",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A browser extension to select the server region and IP version for Xbox Cloud Gaming",
   "icons": {
     "128": "icon.png"
