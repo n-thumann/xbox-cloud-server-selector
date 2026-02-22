@@ -26,6 +26,7 @@ async function load() {
     "#settings select",
   ) as NodeListOf<HTMLSelectElement>;
   for (const select of selects) {
-    select.value = settings[select.id]?.value ?? "default";
+    const setting = settings[select.id] as { text: string; value: string };
+    select.value = setting?.value ?? "default";
   }
 }
