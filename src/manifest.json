@@ -16,13 +16,13 @@
   "content_scripts": [
     {
       "js": ["content.js"],
-      "matches": ["https://www.xbox.com/*/play*"],
+      "matches": ["https://www.xbox.com/*/play*", "https://play.xbox.com/*"],
       "run_at": "document_start",
       "world": "MAIN"
     },
     {
       "js": ["bridge.js"],
-      "matches": ["https://www.xbox.com/*/play*"],
+      "matches": ["https://www.xbox.com/*/play*", "https://play.xbox.com/*"],
       "run_at": "document_start"
     }
   ]
