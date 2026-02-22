@@ -7,7 +7,7 @@ class RegionInterceptor implements Interceptor {
     method: "POST",
     // @ts-ignore: URLPattern is not known to Typescript yet
     urlPattern: new URLPattern(
-      "https://xgpuweb(f2p)?.gssv-play-prod.xboxlive.com/v2/login/user",
+      "https://*.gssv-play-prod.xboxlive.com/v2/login/user",
     ),
   };
 
