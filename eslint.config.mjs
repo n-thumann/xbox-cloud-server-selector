@@ -10,33 +10,42 @@ import { FlatCompat } from "@eslint/eslintrc";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
 });
 
-export default defineConfig([{
-    extends: compat.extends("eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"),
+export default defineConfig([
+  {
+    extends: compat.extends(
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+    ),
 
     plugins: {
-        "@typescript-eslint": typescriptEslint,
+      "@typescript-eslint": typescriptEslint,
     },
 
     languageOptions: {
-        globals: {
-            ...globals.browser,
-        },
+      globals: {
+        ...globals.browser,
+      },
 
-        parser: tsParser,
-        ecmaVersion: "latest",
-        sourceType: "module",
+      parser: tsParser,
+      ecmaVersion: "latest",
+      sourceType: "module",
     },
 
     rules: {
-        "sort-imports": ["error", {}],
+      "sort-imports": ["error", {}],
 
-        "@typescript-eslint/ban-ts-comment": ["error", {
-            "ts-ignore": "allow-with-description",
-        }],
+      "@typescript-eslint/ban-ts-comment": [
+        "error",
+        {
+          "ts-ignore": "allow-with-description",
+        },
+      ],
     },
-}]);
+  },
+]);
