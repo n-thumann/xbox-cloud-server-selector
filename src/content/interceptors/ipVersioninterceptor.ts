@@ -48,7 +48,14 @@ class IpVersionInterceptor implements Interceptor {
     log("New ICE candidates:", newIceCandidates);
 
     content.exchangeResponse = JSON.stringify(newIceCandidates);
-    return new Response(JSON.stringify(content), response);
+
+    const init: ResponseInit = {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    };
+
+    return new Response(JSON.stringify(content), init);
   }
 }
 

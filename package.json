@@ -9,7 +9,7 @@
     "lint:fix": "eslint src --max-warnings 0 --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "clean": "rm -r dist/ node_modules/"
+    "clean": "node -e \"const fs = require('fs'); const path = require('path'); ['dist', 'node_modules'].forEach((dir) => { const target = path.resolve(dir); if (fs.existsSync(target)) fs.rmSync(target, { recursive: true, force: true }); });\""
   },
   "repository": {
     "type": "git",
