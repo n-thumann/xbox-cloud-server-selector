@@ -1,9 +1,14 @@
-import "./style.css";
+﻿import "./style.css";
 
-document.addEventListener("DOMContentLoaded", load);
-document.querySelector("#settings").addEventListener("change", save);
+document.addEventListener("DOMContentLoaded", () => {
+  const settingsForm = document.querySelector("#settings");
+  if (settingsForm) {
+    settingsForm.addEventListener("change", save);
+  }
+  load();
+});
 
-async function save() {
+function save() {
   const selects = document.querySelectorAll(
     "#settings select",
   ) as NodeListOf<HTMLSelectElement>;
@@ -14,19 +19,32 @@ async function save() {
     const value = select.value;
     const text = select.options[select.selectedIndex].text;
 
-    settings[id] = { value: value, text: text };
+    settings[id] = { value, text };
   }
 
-  chrome.storage.local.set(settings);
+  chrome.storage.local.set(settings, () => {
+    if (chrome.runtime.lastError) {
+      console.error("Failed to save settings:", chrome.runtime.lastError.message);
+    }
+  });
 }
 
-async function load() {
-  const settings = await chrome.storage.local.get();
-  const selects = document.querySelectorAll(
-    "#settings select",
-  ) as NodeListOf<HTMLSelectElement>;
-  for (const select of selects) {
-    const setting = settings[select.id] as { text: string; value: string };
-    select.value = setting?.value ?? "default";
-  }
+function load() {
+  chrome.storage.local.get((items) => {
+    if (chrome.runtime.lastError) {
+      console.error("Failed to load settings:", chrome.runtime.lastError.message);
+      return;
+    }
+
+    const settings = items as Record<string, { text: string; value: string }>;
+    const selects = document.querySelectorAll(
+      "#settings select",
+    ) as NodeListOf<HTMLSelectElement>;
+
+    for (const select of selects) {
+      const setting = settings[select.id];
+      select.value = setting?.value ?? "default";
+    }
+  });
 }
+

@@ -19,17 +19,22 @@ function load(settings: Settings) {
     const [resource, config] = args;
     const response = await originalFetch(resource, config);
 
+    const requestUrl =
+      resource instanceof Request ? resource.url : String(resource);
+    const requestMethod = resource instanceof Request
+      ? resource.method
+      : String(config?.method ?? "GET").toUpperCase();
+
     const interceptors = [new RegionInterceptor(), new IpVersionInterceptor()];
 
     for (const interceptor of interceptors) {
       const needInterception =
-        resource instanceof Request &&
-        resource.method == interceptor.requestPattern.method &&
-        interceptor.requestPattern.urlPattern.test(resource.url);
+        requestMethod === interceptor.requestPattern.method &&
+        interceptor.requestPattern.urlPattern.test(requestUrl);
 
       if (!needInterception) continue;
 
-      log(`Intercepted call to ${resource.url}`);
+      log(`Intercepted call to ${requestUrl}`);
       return await interceptor.intercept(settings, response);
     }
 

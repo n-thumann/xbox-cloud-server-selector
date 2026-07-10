@@ -34,7 +34,14 @@ class RegionInterceptor implements Interceptor {
     log("New regions:", newRegions);
 
     content.offeringSettings.regions = newRegions;
-    return new Response(JSON.stringify(content), response);
+
+    const init: ResponseInit = {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    };
+
+    return new Response(JSON.stringify(content), init);
   }
 }
 
